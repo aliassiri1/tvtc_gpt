@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TVTC_GPT</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <img class="search-icon" src="{{ url_for('static', filename='images/icon.png') }}" alt="Search Icon">
+    <h1>TVTC_GPT</h1>
+    <div class="search-box">
+      <form method="POST" action="/search" onsubmit="showLoading()">
+        <input type="text" name="query" placeholder="Enter your search query" required>
+        <button class="btn btn-search" type="submit" name="action" value="search">Search</button>
+      </form>
+      <form action="/random" method="POST" onsubmit="showLoading()">
+        <button class="btn btn-random" type="submit" name="action" value="random">Example of past tense</button>
+      </form>
+    </div>
+    {% if search_result %}
+    <div class="result-box">
+      <h2>{{ search_title }}</h2>
+      <textarea rows="5" cols="50" readonly>{{ search_result }}</textarea>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loader-container">
+      <div class="loader"></div>
+    </div>
+    <p class="loading-text">TVTC_ GPT on its way to answer you...</p>
+  </div>
+
+  <script>
+    function showLoading() {
+      var loadingOverlay = document.getElementById('loadingOverlay');
+      loadingOverlay.style.display = 'flex';
+    }
+  </script>
+</body>
+</html>
